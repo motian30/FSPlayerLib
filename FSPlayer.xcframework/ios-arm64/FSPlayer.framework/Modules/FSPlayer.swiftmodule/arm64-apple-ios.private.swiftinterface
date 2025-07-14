@@ -1,0 +1,258 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name FSPlayer
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+@_exported import FSPlayer
+import Foundation
+import Swift
+import SwiftProtobuf
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_inheritsConvenienceInitializers @objc public class SEIDataModel : ObjectiveC.NSObject {
+  public var layoutSEI: [FSPlayer.CdnLayoutData]
+  public var customSEI: [FSPlayer.CdnCustomInfo]
+  public var userInfo: [FSPlayer.CdnUserInfo] {
+    get
+  }
+  public var globalCustom: [FSPlayer.CdnCustomInfo] {
+    get
+  }
+  @objc public var videoSEI: [FSPlayer.VideoSEIData] {
+    @objc get
+  }
+  @objc public func parse(fromBytes bytes: Swift.UnsafePointer<Swift.UInt8>, length: Swift.Int)
+  @objc public func equal(_ model: FSPlayer.SEIDataModel?) -> FSPlayer.SEIEqualData
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class VideoSEIData : ObjectiveC.NSObject {
+  @objc public var x: CoreFoundation.CGFloat
+  @objc public var y: CoreFoundation.CGFloat
+  @objc public var width: CoreFoundation.CGFloat
+  @objc public var height: CoreFoundation.CGFloat
+  @objc public var uid: Swift.String
+  @objc public var key: Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class SEIEqualData : ObjectiveC.NSObject {
+  @objc public var user: Swift.Bool
+  @objc public var userInfo: Swift.Bool
+  @objc public var gCustom: Swift.Bool
+  @objc public var custom: Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum CdnEventType : SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Swift.Int
+  case layout
+  case custom
+  case UNRECOGNIZED(Swift.Int)
+  public init()
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+  public static let allCases: [FSPlayer.CdnEventType]
+  public typealias AllCases = [FSPlayer.CdnEventType]
+}
+public enum CdnLayoutType : SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Swift.Int
+  case audioAndVideo
+  case onlyAudio
+  case onlyVideo
+  case UNRECOGNIZED(Swift.Int)
+  public init()
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+  public static let allCases: [FSPlayer.CdnLayoutType]
+  public typealias AllCases = [FSPlayer.CdnLayoutType]
+}
+public enum CdnAudioType : SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Swift.Int
+  case microphone
+  case systemVoice
+  case UNRECOGNIZED(Swift.Int)
+  public init()
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+  public static let allCases: [FSPlayer.CdnAudioType]
+  public typealias AllCases = [FSPlayer.CdnAudioType]
+}
+public enum CdnVideoType : SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Swift.Int
+  case camera
+  case screen
+  case UNRECOGNIZED(Swift.Int)
+  public init()
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+  public static let allCases: [FSPlayer.CdnVideoType]
+  public typealias AllCases = [FSPlayer.CdnVideoType]
+}
+public struct CdnSeiData : @unchecked Swift.Sendable {
+  public var event: FSPlayer.CdnEventType
+  public var data: Foundation.Data
+  public var compress: Swift.Bool
+  public var version: Swift.Int32
+  public var unknownFields: SwiftProtobuf.UnknownStorage
+  public init()
+}
+public struct CdnLayoutData : Swift.Sendable {
+  public var roomID: Swift.String
+  public var type: FSPlayer.CdnLayoutType
+  public var userMap: [Swift.String : FSPlayer.CdnUserInfo]
+  public var globalCustom: FSPlayer.CdnCustomInfo {
+    get
+    set
+  }
+  public var hasGlobalCustom: Swift.Bool {
+    get
+  }
+  public mutating func clearGlobalCustom()
+  public var unknownFields: SwiftProtobuf.UnknownStorage
+  public init()
+}
+public struct CdnUserInfo : Swift.Sendable {
+  public var id: Swift.String
+  public var audios: [FSPlayer.CdnAudioInfo]
+  public var videos: [FSPlayer.CdnVideoInfo]
+  public var custom: FSPlayer.CdnCustomInfo {
+    get
+    set
+  }
+  public var hasCustom: Swift.Bool {
+    get
+  }
+  public mutating func clearCustom()
+  public var unknownFields: SwiftProtobuf.UnknownStorage
+  public init()
+}
+public struct CdnAudioInfo : Swift.Sendable {
+  public var type: FSPlayer.CdnAudioType
+  public var isEnable: Swift.Bool
+  public var isMute: Swift.Bool
+  public var volume: Swift.Double
+  public var updateTime: Swift.Int64 {
+    get
+    set
+  }
+  public var hasUpdateTime: Swift.Bool {
+    get
+  }
+  public mutating func clearUpdateTime()
+  public var unknownFields: SwiftProtobuf.UnknownStorage
+  public init()
+}
+public struct CdnVideoInfo : Swift.Sendable {
+  public var type: FSPlayer.CdnVideoType
+  public var isEnable: Swift.Bool
+  public var isMute: Swift.Bool
+  public var width: Swift.Int32
+  public var height: Swift.Int32
+  public var x: Swift.Int32
+  public var y: Swift.Int32
+  public var updateTime: Swift.Int64 {
+    get
+    set
+  }
+  public var hasUpdateTime: Swift.Bool {
+    get
+  }
+  public mutating func clearUpdateTime()
+  public var unknownFields: SwiftProtobuf.UnknownStorage
+  public init()
+}
+public struct CdnCustomInfo : Swift.Sendable {
+  public var roomID: Swift.String
+  public var customKeyMap: [Swift.String : Swift.String]
+  public var updateTime: Swift.Int64 {
+    get
+    set
+  }
+  public var hasUpdateTime: Swift.Bool {
+    get
+  }
+  public mutating func clearUpdateTime()
+  public var unknownFields: SwiftProtobuf.UnknownStorage
+  public init()
+}
+extension FSPlayer.CdnEventType : SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+}
+extension FSPlayer.CdnLayoutType : SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+}
+extension FSPlayer.CdnAudioType : SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+}
+extension FSPlayer.CdnVideoType : SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+}
+extension FSPlayer.CdnSeiData : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: Swift.String
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+  public mutating func decodeMessage<D>(decoder: inout D) throws where D : SwiftProtobuf.Decoder
+  public func traverse<V>(visitor: inout V) throws where V : SwiftProtobuf.Visitor
+  public static func == (lhs: FSPlayer.CdnSeiData, rhs: FSPlayer.CdnSeiData) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension FSPlayer.CdnLayoutData : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: Swift.String
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+  public mutating func decodeMessage<D>(decoder: inout D) throws where D : SwiftProtobuf.Decoder
+  public func traverse<V>(visitor: inout V) throws where V : SwiftProtobuf.Visitor
+  public static func == (lhs: FSPlayer.CdnLayoutData, rhs: FSPlayer.CdnLayoutData) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension FSPlayer.CdnUserInfo : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: Swift.String
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+  public mutating func decodeMessage<D>(decoder: inout D) throws where D : SwiftProtobuf.Decoder
+  public func traverse<V>(visitor: inout V) throws where V : SwiftProtobuf.Visitor
+  public static func == (lhs: FSPlayer.CdnUserInfo, rhs: FSPlayer.CdnUserInfo) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension FSPlayer.CdnAudioInfo : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: Swift.String
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+  public mutating func decodeMessage<D>(decoder: inout D) throws where D : SwiftProtobuf.Decoder
+  public func traverse<V>(visitor: inout V) throws where V : SwiftProtobuf.Visitor
+  public static func == (lhs: FSPlayer.CdnAudioInfo, rhs: FSPlayer.CdnAudioInfo) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension FSPlayer.CdnVideoInfo : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: Swift.String
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+  public mutating func decodeMessage<D>(decoder: inout D) throws where D : SwiftProtobuf.Decoder
+  public func traverse<V>(visitor: inout V) throws where V : SwiftProtobuf.Visitor
+  public static func == (lhs: FSPlayer.CdnVideoInfo, rhs: FSPlayer.CdnVideoInfo) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension FSPlayer.CdnCustomInfo : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: Swift.String
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap
+  public mutating func decodeMessage<D>(decoder: inout D) throws where D : SwiftProtobuf.Decoder
+  public func traverse<V>(visitor: inout V) throws where V : SwiftProtobuf.Visitor
+  public static func == (lhs: FSPlayer.CdnCustomInfo, rhs: FSPlayer.CdnCustomInfo) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
