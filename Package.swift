@@ -26,8 +26,6 @@ let package = Package(
             "FSPlayer",
             .product(name: "SwiftProtobuf", package: "swift-protobuf"),
             .product(name: "Gzip", package: "GzipSwift"),
-            
-            
         ]),
           
     ],
